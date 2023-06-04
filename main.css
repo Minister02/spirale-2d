@@ -1,0 +1,21 @@
+body {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100vh;
+}
+
+.effect-box {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	width: 30%;
+}
+
+.canvas-box {
+	width: 50%;
+}
+
+canvas {
+	border: 1px solid #000;
+}
