@@ -1,47 +1,52 @@
 // inicjujemy zmienne
+const rangeInput = document.querySelector('#range');
 const sizeInput = document.querySelector('#size');
-const stepsInput = document.querySelector('#steps');
+const roundInput = document.querySelector('#round');
 const c = document.getElementById('myCanvas');
 const ctx = c.getContext('2d');
-const centerX = 150;
-const centerY = 150;
 
-// centrujemy na siatce nasz obiekt
-ctx.moveTo(centerX, centerY);
-
-const drawTheta = (size, steps) => {
-	// size - rozmiar spirali
-	// steps - ilość kroków spirali
+// Funkcja rysująca spiralę
+const drawTheta = gutters => {
+	let it = Math.PI / 360;
+	let n = 500;
+	let a = 2;
+	let b = 0.1;
 	ctx.beginPath();
-	const increment = (2 * Math.PI) / steps;
-	let theta = 0;
-
-	// pętla w której inicjujemy jednocześnie kolejne wartośći kąta theta
-	while ((theta += increment) < size * Math.PI) {
-		// Obliczanie wartości współrzędnych w pętli
-		const newX = centerX + theta * Math.cos(theta);
-		const newY = centerY + theta * Math.sin(theta);
-		// rysowanie linii do kolejnych punktów na osi współrzędnych
-		ctx.lineTo(newX, newY);
+	for (let i = 0; i < n; i += gutters) {
+		t = it * i * 10;
+		r = a * Math.exp(b * t);
+		x = r * Math.cos(t);
+		y = r * Math.sin(t);
+		ctx.lineTo(250 + x, 250 + y);
 	}
 	ctx.stroke();
 };
 
-// funkcja wywyołująca się pierwszy raz aby wygenerować domyślne parametry
-drawTheta(15, 5);
+drawTheta(1);
 
-// Nasłuchiwacz na ilość kroków
-sizeInput.addEventListener('input', () => {
-	steps = stepsInput.value;
-	const size = sizeInput.value;
-	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
-	drawTheta(size, steps);
-});
+// // Nasłuchiwacz na ilość kroków
+// sizeInput.addEventListener('input', () => {
+// 	range = rangeInput.value;
+// 	round = roundInput.value;
+// 	const size = sizeInput.value;
+// 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
+// 	drawTheta(size, range, round);
+// });
 
-// Nasłuchiwacz na wartość krzywej
-stepsInput.addEventListener('input', () => {
-	size = sizeInput.value;
-	const steps = stepsInput.value;
-	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
-	drawTheta(size, steps);
-});
+// // Nasłuchiwacz na ilość kroków
+// rangeInput.addEventListener('input', () => {
+// 	size = sizeInput.value;
+// 	round = roundInput.value;
+// 	const range = rangeInput.value;
+// 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
+// 	drawTheta(size, range, round);
+// });
+
+// // Nasłuchiwacz na ilość kroków
+// roundInput.addEventListener('input', () => {
+// 	size = sizeInput.value;
+// 	range = rangeInput.value;
+// 	const round = roundInput.value;
+// 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
+// 	drawTheta(size, range, round);
+// });

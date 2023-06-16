@@ -11,13 +11,16 @@
 
 <body>
     <form class="effect-box">
-        <label for="steps">Steps</label>
-        <input type="range" name="steps" id="steps" min="3" max="55" value="5">
-        <label for="size">Size</label>
-        <input type="range" id="size" min="5" max="40" value="15">
+        <label for="range"><strong>Zakres</strong></label>
+        <input type="range" id="range" min="5" max="35" value="10" step="1">
+        <label for="size"><strong>Rozmiar</strong></label>
+        <input type="range" id="size" min="0.01" max="0.50" value="0.06" step="0.01">
+        <label for="round"><strong>Zaokrąglenie</strong></label>
+        <input type="range" id="round" min="500" max="5000" value="2500" step="100">
+    </form>
     </form>
     <div class="canvas-box">
-        <canvas id="myCanvas" width="300" height="300">
+        <canvas id="myCanvas" width="500" height="500">
         </canvas>
     </div>
     <script src="./main.js"></script>
