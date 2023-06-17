@@ -9,7 +9,8 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	width: 30%;
+	width: 15%;
+	margin-left: 20%;
 }
 
 .canvas-box {

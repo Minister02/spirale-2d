@@ -1,52 +1,60 @@
 // inicjujemy zmienne
-const rangeInput = document.querySelector('#range');
-const sizeInput = document.querySelector('#size');
-const roundInput = document.querySelector('#round');
+const rangeInput = document.getElementById('range');
+const sizeInput = document.getElementById('size');
+const roundInput = document.getElementById('round');
+const densityInput = document.getElementById('density');
 const c = document.getElementById('myCanvas');
 const ctx = c.getContext('2d');
 
+// Tagi label z akutalnymi parametrami
+const rangeLabel = document.getElementById('rangeLabel');
+const sizeLabel = document.getElementById('sizeLabel');
+const roundLabel = document.getElementById('roundLabel');
+const densityLabel = document.getElementById('densityLabel');
+
 // Funkcja rysująca spiralę
-const drawTheta = gutters => {
+function drawTheta() {
+	const density = parseInt(densityInput.value);
+	const size = parseInt(sizeInput.value);
+	const range = parseInt(rangeInput.value);
+	const round = parseFloat(roundInput.value);
 	let it = Math.PI / 360;
-	let n = 500;
-	let a = 2;
-	let b = 0.1;
+	let sizeTheta = size;
+	let rangeTheta = range;
+	let roundTheta = round;
+	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	ctx.beginPath();
-	for (let i = 0; i < n; i += gutters) {
-		t = it * i * 10;
-		r = a * Math.exp(b * t);
-		x = r * Math.cos(t);
-		y = r * Math.sin(t);
+	for (let i = 0; i < sizeTheta; i += density) {
+		const t = it * i * 10;
+		const r = rangeTheta * Math.exp(roundTheta * t);
+		const x = r * Math.cos(t);
+		const y = r * Math.sin(t);
 		ctx.lineTo(250 + x, 250 + y);
 	}
 	ctx.stroke();
-};
+}
 
-drawTheta(1);
+// Funkcja aktualizująca parametry poszczególnych suwaków
+function updateStats() {
+	rangeLabel.textContent = 'Zakres spirali: ' + rangeInput.value;
+	sizeLabel.textContent = 'Rozmiar spirali: ' + sizeInput.value;
+	roundLabel.textContent = 'Zaokrąglenie spirali: ' + roundInput.value;
+	densityLabel.textContent = 'Zagęszczenie punktów: ' + densityInput.value;
+}
 
-// // Nasłuchiwacz na ilość kroków
-// sizeInput.addEventListener('input', () => {
-// 	range = rangeInput.value;
-// 	round = roundInput.value;
-// 	const size = sizeInput.value;
-// 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
-// 	drawTheta(size, range, round);
-// });
+// funkcja aktualizaująca parametry grafiki i tworząca nowy obraz
+function updateTheta() {
+	drawTheta();
+	updateStats();
+}
 
-// // Nasłuchiwacz na ilość kroków
-// rangeInput.addEventListener('input', () => {
-// 	size = sizeInput.value;
-// 	round = roundInput.value;
-// 	const range = rangeInput.value;
-// 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
-// 	drawTheta(size, range, round);
-// });
+// Nasłuchiwacze na suwaki
+densityInput.addEventListener('input', updateTheta);
 
-// // Nasłuchiwacz na ilość kroków
-// roundInput.addEventListener('input', () => {
-// 	size = sizeInput.value;
-// 	range = rangeInput.value;
-// 	const round = roundInput.value;
-// 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // czyszczenie siatki w celu wygenerowana nowej struktury
-// 	drawTheta(size, range, round);
-// });
+sizeInput.addEventListener('input', updateTheta);
+
+rangeInput.addEventListener('input', updateTheta);
+
+roundInput.addEventListener('input', updateTheta);
+
+updateTheta();

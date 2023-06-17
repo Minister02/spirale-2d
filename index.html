@@ -11,17 +11,18 @@
 
 <body>
     <form class="effect-box">
-        <label for="range"><strong>Zakres</strong></label>
-        <input type="range" id="range" min="5" max="35" value="10" step="1">
-        <label for="size"><strong>Rozmiar</strong></label>
-        <input type="range" id="size" min="0.01" max="0.50" value="0.06" step="0.01">
-        <label for="round"><strong>Zaokrąglenie</strong></label>
-        <input type="range" id="round" min="500" max="5000" value="2500" step="100">
+        <label for="size" id="sizeLabel"></label>
+        <input type="range" id="size" min="300" max="1500" value="400" step="1">
+        <label for="range" id="rangeLabel"></label>
+        <input type="range" id="range" min="2" max="35" value="2" step="1">
+        <label for="round" id="roundLabel"></label>
+        <input type="range" id="round" min="0.1" max="0.50" value="0.1" step="0.01">
+        <label for="density" id="densityLabel"></label>
+        <input type="range" id="density" min="1" max="10" value="1" step="1">
     </form>
     </form>
     <div class="canvas-box">
-        <canvas id="myCanvas" width="500" height="500">
-        </canvas>
+        <canvas id="myCanvas" width="500" height="500"></canvas>
     </div>
     <script src="./main.js"></script>
 </body>
