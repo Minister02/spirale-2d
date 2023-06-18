@@ -1,4 +1,4 @@
-// inicjujemy zmienne
+// Pobieramy podstawowe zmienne i tagi input
 const rangeInput = document.getElementById('range');
 const sizeInput = document.getElementById('size');
 const roundInput = document.getElementById('round');
@@ -6,7 +6,7 @@ const densityInput = document.getElementById('density');
 const c = document.getElementById('myCanvas');
 const ctx = c.getContext('2d');
 
-// Tagi label z akutalnymi parametrami
+// Pobieramy tagi label z akutalnymi parametrami
 const rangeLabel = document.getElementById('rangeLabel');
 const sizeLabel = document.getElementById('sizeLabel');
 const roundLabel = document.getElementById('roundLabel');
@@ -19,8 +19,8 @@ function drawTheta() {
 	const range = parseInt(rangeInput.value);
 	const round = parseFloat(roundInput.value);
 	let it = Math.PI / 360;
-	let sizeTheta = size;
-	let rangeTheta = range;
+	let sizeTheta = range;
+	let rangeTheta = size;
 	let roundTheta = round;
 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	ctx.beginPath();
@@ -50,11 +50,8 @@ function updateTheta() {
 
 // Nasłuchiwacze na suwaki
 densityInput.addEventListener('input', updateTheta);
-
 sizeInput.addEventListener('input', updateTheta);
-
 rangeInput.addEventListener('input', updateTheta);
-
 roundInput.addEventListener('input', updateTheta);
 
 updateTheta();
